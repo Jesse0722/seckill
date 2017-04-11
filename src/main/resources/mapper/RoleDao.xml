@@ -18,10 +18,10 @@
         SELECT
         r.role_id,
         r.role_name,
-        u.user_id,
-        u.user_name,
-        u.password,
-        u.email
+        u.user_id as "user.user_id",
+        u.user_name as "user.user_name",
+        u.password as "user.password",
+        u.email as "user.email"
         from role r INNER JOIN user u on r.user_id=u.user_id
         WHERE  role_id=#{roleId}
     </select>

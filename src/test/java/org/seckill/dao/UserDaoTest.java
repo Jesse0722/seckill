@@ -49,7 +49,7 @@ public class UserDaoTest {
             logger.info("Email:"+user.getEmail());
             logger.info("Role:"+roleSet.size());
             for(Role role:roleSet) {
-                logger.info("roleName:" + role.getRoleName()+"  "+role.getUser());
+                logger.info("roleName:" + role.getRoleName()+"  "+role.getRoleId());
             }
         }
     }
