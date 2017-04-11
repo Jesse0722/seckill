@@ -6,14 +6,10 @@
     <!--property是entity属性名称，colunm对应数据库列-->
     <!--result 映射需要返回的字段-->
     <!--collection是集合-->
-    <!--<resultMap type="org.seckill.entity.Role" id="roleResultMap">-->
-        <!--<id property="roleId" column="role_id" javaType="int" jdbcType="INTEGER"/>-->
-        <!--<result property="roleName" column="role_name" javaType="string" jdbcType="VARCHAR"/>-->
-        <!--<collection  property="users" ofType="org.seckill.entity.User">-->
-            <!--<id property="userId" column="user_id" javaType="int" jdbcType="INTEGER"/>-->
-            <!--<result property="UserName" column="user_name" javaType="string" jdbcType="VARCHAR"/>-->
-        <!--</collection>-->
-    <!--</resultMap>-->
+    <insert id="insertRole">
+        insert into role (role_name,user_id) VALUES (#{roleName},#{userId})
+    </insert>
+
     <select id="getById" resultType="Role" parameterType="int">
         SELECT
         r.role_id,

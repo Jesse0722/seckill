@@ -10,5 +10,7 @@ import java.util.Set;
  */
 public interface RoleDao {
 
+    int insertRole(@Param("roleName") String roleName,@Param("userId") int userId);
+
     Role getById(@Param("roleId") int roleId);
 }

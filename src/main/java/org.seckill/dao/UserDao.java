@@ -1,8 +1,8 @@
 package org.seckill.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.seckill.entity.Role;
 import org.seckill.entity.User;
+import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 
 import java.util.Date;
 import java.util.List;
@@ -17,4 +17,6 @@ public interface UserDao {
     User getById(@Param("userId") int userId);
 
     List<User> getList(@Param("offset")int offset,@Param("limit")int limit);
+
+    User getByName(@Param("userName")String userName);
 }

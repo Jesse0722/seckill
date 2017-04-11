@@ -82,9 +82,9 @@ public class User {
     @Override
     public String toString(){
         return "User{"+
+                "user_id"+userId+
                 "user_name:"+userName+
                 "password:"+password+
-                "email:"+email+
-                "role:"+roleId;
+                "email:"+email;
     }
 }

@@ -4,11 +4,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seckill.entity.Role;
 import org.seckill.entity.User;
+import org.seckill.enums.RoleEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +28,8 @@ public class UserDaoTest {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RoleDao roleDao;
 
     @Test
     public void insertUser() throws Exception {
@@ -51,6 +55,33 @@ public class UserDaoTest {
             for(Role role:roleSet) {
                 logger.info("roleName:" + role.getRoleName()+"  "+role.getRoleId());
             }
+        }
+    }
+    @Transactional
+    @Test
+    public void createUser(){
+        String userName="lee";
+        String password="123456";
+        String role= RoleEnum.USER.getName();
+        int count = userDao.insertUser(userName,password);
+        if(count>0){
+            logger.info("insert user success username={}",userName);
+            int insertRoleCount=roleDao.insertRole(userName,userDao.getByName(userName).getUserId());
+            if(insertRoleCount>0){
+                logger.info("insert role success username={},role={}",userName,role);
+            }else{
+                logger.info("insert role fail username={},role={}",userName,role);
+            }
+        }else{
+            logger.info("insert user fail username={},role={}",userName,role);
+        }
+    }
+
+    @Test
+    public void getByName(){
+        User user = userDao.getByName("lijiajun");
+        if(user!=null){
+            logger.info("user={}" ,user);
         }
     }
 

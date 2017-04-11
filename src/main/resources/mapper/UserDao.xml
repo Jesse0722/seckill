@@ -21,6 +21,7 @@
      </resultMap>
     <select id="getById" resultMap="userResultMap" parameterType="int">
         SELECT
+            u.user_id,
             u.user_name,
             u.password,
             u.email,
@@ -28,6 +29,17 @@
             r.role_name
         from user u,role r WHERE u.user_id=r.user_id
         AND u.user_id = #{userId}
+    </select>
+    <select id="getByName" resultMap="userResultMap" parameterType="String">
+         SELECT
+            u.user_id,
+            u.user_name,
+            u.password,
+            u.email,
+            r.role_id,
+            r.role_name
+        from user u,role r WHERE u.user_id=r.user_id
+        AND u.user_name = #{userName}
     </select>
 
 </mapper>
