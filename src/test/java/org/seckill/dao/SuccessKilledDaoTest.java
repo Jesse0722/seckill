@@ -49,6 +49,7 @@ public class SuccessKilledDaoTest {
         SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(1000,userPhone);
         if(successKilled != null){
             logger.info("queryByIdWithSeckill,successKilled ={}",successKilled);
+            logger.info("queryByIdWithSeckill,successKilled.Seckill ={}",successKilled.getSeckill());
         }
     }
 

@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.UserDao">
+    <insert id="insertUser">
+        INSERT  ignore into user(user_name,password)
+        VALUES (#{userName},#{password})
+    </insert>
+        <!--property是entity属性名称，colunm对应数据库列-->
+        <!--result 映射需要返回的字段-->
+        <!--collection是集合-->
+     <resultMap type="org.seckill.entity.User" id="userResultMap">
+         <id property="userId" column="user_id" javaType="int" jdbcType="INTEGER"/>
+         <result property="userName" column="user_name" javaType="string" jdbcType="VARCHAR"/>
+         <result property="password" column="password" javaType="string" jdbcType="VARCHAR"/>
+         <result property="email" column="email" javaType="string" jdbcType="VARCHAR"/>
+         <collection  property="roles" ofType="org.seckill.entity.Role">
+             <id property="roleId" column="role_id" javaType="int" jdbcType="INTEGER"/>
+             <result property="roleName" column="role_name" javaType="string" jdbcType="VARCHAR"/>
+         </collection>
+     </resultMap>
+    <select id="getById" resultMap="userResultMap" parameterType="int">
+        SELECT
+            u.user_name,
+            u.password,
+            u.email,
+            r.role_name
+        from user u,role r WHERE u.user_id=r.user_id
+        AND u.user_id = #{userId}
+    </select>
+
+</mapper>
